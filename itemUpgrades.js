@@ -342,26 +342,30 @@ button.disabled = false;
         }, 500); // 500 milisekund = 0,5 sekundy
     }
     function getAllBurnableItems(divArray, burnUni, ignoreDiv) {
-        var filteredDivs = [];
-        for (var i3 = 0; i3 < divArray.length; i3++) {
-            var currentDiv = divArray[i3];
-            if (currentDiv === ignoreDiv) {
-                continue;
-            }
-            var tipValue = currentDiv.getAttribute('tip');
-            var parser = new DOMParser();
-            var tipDoc = parser.parseFromString(tipValue, "text/html");
-            var itemName = tipDoc.querySelector('b.item-name').textContent;
-            var type = tipDoc.querySelector('span.type-text').textContent.split(':')[1].trim();
-            var isUnique = tipValue.indexOf('* unikatowy *') !== -1;
-            var isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
-            var isLegendary = tipValue.indexOf('* legendarny *') !== -1;
-            if ((burnUni === 1 && isUnique || burnUni === 0 && !isUnique) && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
-                filteredDivs.push(currentDiv);
-            }
+    var filteredDivs = [];
+    for (var i3 = 0; i3 < divArray.length; i3++) {
+        var currentDiv = divArray[i3];
+        if (currentDiv === ignoreDiv) {
+            continue;
         }
-        return [filteredDivs, filteredDivs.length];
+        var tipValue = currentDiv.getAttribute('tip');
+        if (tipValue.indexOf('Bezużyteczny składnik rzemieślniczy') !== -1) {
+            continue;
+        }
+        var parser = new DOMParser();
+        var tipDoc = parser.parseFromString(tipValue, "text/html");
+        var itemName = tipDoc.querySelector('b.item-name').textContent;
+        var type = tipDoc.querySelector('span.type-text').textContent.split(':')[1].trim();
+        var isUnique = tipValue.indexOf('* unikatowy *') !== -1;
+        var isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
+        var isLegendary = tipValue.indexOf('* legendarny *') !== -1;
+        if ((burnUni === 1 && isUnique || burnUni === 0 && !isUnique) && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
+            filteredDivs.push(currentDiv);
+        }
     }
+    return [filteredDivs, filteredDivs.length];
+}
+
     function openUpgradesTab(){
         // uzyskaj dostęp do elementu div o id "myDiv"
         const myDiv = document.getElementById("b_recipes");
