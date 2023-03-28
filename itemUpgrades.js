@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.0.1
+// @version      0.0.2
 // @description  Prosty dodatek
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
