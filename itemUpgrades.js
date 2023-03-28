@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.0.2
+// @version      0.0.1
 // @description  Prosty dodatek
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
@@ -135,7 +135,7 @@
   //utwórz przycisk
   var button = document.createElement("button");
   button.disabled = true;
-  button.innerText = "Ulepsz itemy...";
+  button.innerText = "Ulepsz item";
   // Dodaj przycisk do okna
   box.appendChild(button);
   //Dodaj br
@@ -359,9 +359,13 @@ button.disabled = false;
       var isUnique = tipValue.indexOf('* unikatowy *') !== -1;
       var isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
       var isLegendary = tipValue.indexOf('* legendarny *') !== -1;
-      if ((burnUni === 1 && isUnique || burnUni === 0 && !isUnique) && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
+      if (!isUnique && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
           filteredDivs.push(currentDiv);
+
       }
+      else if(burnUni === 1 && isUnique && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe'){
+              filteredDivs.push(currentDiv);
+          }
   }
   return [filteredDivs, filteredDivs.length];
 }
@@ -538,6 +542,7 @@ const [burnableItems, burnableItemsLength] = getAllBurnableItems(itemsInBag, bur
       if (burnableItems.length == 0){
        alert("Brak itemów, do ulepszania...");
       }
+        console.log("Itemy zdolne do przepalenia",burnableItems);
         await new Promise(resolve => setTimeout(resolve, 300));
 
       loadItemToSlot(itemDiv);
