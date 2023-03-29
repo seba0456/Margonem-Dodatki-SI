@@ -381,9 +381,10 @@
         const isUnique = tipValue.indexOf('* unikatowy *') !== -1;
         const isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
         const isLegendary = tipValue.indexOf('* legendarny *') !== -1;
+        const isOwned = tipValue.indexOf('Związany z właścicielem') !== -1;
         console.log("Sprawdzanie itemu o nazwie:", itemName, burnUni, isUnique, isHeroic, isLegendary);
         console.log(isHeroic, isLegendary);
-        if (isHeroic || isLegendary) {
+        if (isHeroic || isLegendary || isOwned) {
             return false;
         } else {
             console.log("zwracam true");
