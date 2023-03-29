@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.0.5
+// @version      0.0.4
 // @description  Prosty dodatek do automatycznego ulepszania itemów.
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
@@ -357,8 +357,11 @@
             var isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
             var isLegendary = tipValue.indexOf('* legendarny *') !== -1;
             const isOwned = tipValue.indexOf('Związany z właścicielem') !== -1;
-            if (isOwned && isUnique && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
+            if (!isOwned && isUnique && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
                 filteredDivs.push(currentDiv);
+            }
+            else{
+                console.log(itemName, isOwned);
             }
         }
         return [filteredDivs, filteredDivs.length];
@@ -383,7 +386,7 @@
         const isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
         const isLegendary = tipValue.indexOf('* legendarny *') !== -1;
         const isOwned = tipValue.indexOf('Związany z właścicielem') !== -1;
-        console.log("Sprawdzanie itemu o nazwie:", itemName, burnUni, isUnique, isHeroic, isLegendary,"IsOwned:", isOwned);
+        console.log("Sprawdzanie itemu o nazwie:", itemName, burnUni, isUnique, isHeroic, isLegendary, "IsOwned:", isOwned);
         console.log(isHeroic, isLegendary);
         if (isHeroic || isLegendary || isOwned) {
             return false;
