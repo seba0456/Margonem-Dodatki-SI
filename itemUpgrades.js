@@ -17,8 +17,8 @@
 // @connect      margonem.pl
 // @connect      margonem.com
 // @run-at       document-body
-// @updateURL    https://github.com/seba0456/Margonem-Item-Upgrade/blob/main/itemUpgrades.js
-// @downloadURL  https://github.com/seba0456/Margonem-Item-Upgrade/blob/main/itemUpgrades.js
+// @updateURL    https://raw.githubusercontent.com/seba0456/Margonem-Item-Upgrade/main/itemUpgrades.js
+// @downloadURL  https://raw.githubusercontent.com/seba0456/Margonem-Item-Upgrade/main/itemUpgrades.js
 // @grant        GM_addStyle
 // @grant GM_log
 // ==/UserScript==
