@@ -356,7 +356,8 @@
             var isUnique = tipValue.indexOf('* unikatowy *') !== -1;
             var isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
             var isLegendary = tipValue.indexOf('* legendarny *') !== -1;
-            if (isUnique && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
+            const isOwned = tipValue.indexOf('Związany z właścicielem') !== -1;
+            if (isOwned && isUnique && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
                 filteredDivs.push(currentDiv);
             }
         }
@@ -382,7 +383,7 @@
         const isHeroic = tipValue.indexOf('* heroiczny *') !== -1;
         const isLegendary = tipValue.indexOf('* legendarny *') !== -1;
         const isOwned = tipValue.indexOf('Związany z właścicielem') !== -1;
-        console.log("Sprawdzanie itemu o nazwie:", itemName, burnUni, isUnique, isHeroic, isLegendary);
+        console.log("Sprawdzanie itemu o nazwie:", itemName, burnUni, isUnique, isHeroic, isLegendary,"IsOwned:", isOwned);
         console.log(isHeroic, isLegendary);
         if (isHeroic || isLegendary || isOwned) {
             return false;
@@ -574,9 +575,11 @@
                     }
                 }
 
-                await new Promise(resolve => setTimeout(resolve, 150)); // dodana obietnica
+                await new Promise(resolve => setTimeout(resolve, 200)); // dodana obietnica
+
 
                 if (burnUni == 1) {
+                    console.log("Zaczynam palić uni!");
                     await new Promise(resolve => setTimeout(resolve, 300));
 
                     console.log(burnableItems);
@@ -616,6 +619,7 @@
                                     console.log("Wysyłam:", burnableItems[x])
                                     if (isItemBurnable(burnableItems[x], burnUni)) {
                                         await new Promise(resolve => setTimeout(resolve, 200));
+                                        console.log("Item palę");
                                         loadItemToSlot(burnableItems[x]);
                                         console.log(`Iteracja ${j + 1} z ${iterations}`);
                                         console.log("chcę wczytać...", x);
