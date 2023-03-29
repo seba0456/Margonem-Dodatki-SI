@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.0.4
+// @version      0.0.5
 // @description  Prosty dodatek do automatycznego ulepszania itemów.
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
@@ -360,8 +360,8 @@
             if (!isOwned && isUnique && !isHeroic && !isLegendary && type !== 'Neutralne' && type !== 'Strzały' && type !== 'Konsumpcyjne' && type !== 'Błogosławieństwa' && type !== 'Torby' && type !== 'Talizmany' && type !== 'Questowe') {
                 filteredDivs.push(currentDiv);
             }
-            else{
-                console.log(itemName, isOwned);
+            else {
+                //console.log(itemName, isOwned);
             }
         }
         return [filteredDivs, filteredDivs.length];
@@ -506,24 +506,52 @@
                 // }
                 //kiedyś zadziała XD
                 console.log("Itemy zdolne do przepalenia", burnableItems);
+                var divButton = null;
                 await new Promise(resolve => setTimeout(resolve, 300));
 
                 loadItemToSlot(itemDiv);
-                var divButton = document.querySelector('div[tip="Dodaj automatycznie przedmioty pospolite z torby numer 1."]');
+
+                divButton = document.querySelector('div[tip="Dodaj automatycznie przedmioty pospolite z torby numer 1."]');
                 for (let j = 0; j < 5; j++) {
                     //console.log("Klikam torbę:",i,j,"raz...")
                     console.log(`Iteracja wewnętrznego fora nr ${j}`);
                     divButton.click();
-                    await new Promise(resolve => setTimeout(resolve, 250));
+                    console.log("Jestem torbą 1!");
+                    console.log("Klikam na: ", divButton);
+                    await new Promise(resolve => setTimeout(resolve, 350));
                     const enhanceSubmit = document.querySelector(".enhance__submit");
                     const siButton = enhanceSubmit.querySelector(".SI-button");
 
                     if (siButton.classList.contains("disable")) {
-                        console.log("SI-button is disabled, so skipping for...");
+                        console.log("SI-button is disabled, so skipping for...", siButton);
                         await new Promise(resolve => setTimeout(resolve, 100));
                         break;
                     } else {
-                        console.log("SI-button is enabled");
+                        console.log("SI-button is enabled loop 1");
+
+                        await siButton.click();
+                        const myButton = document.getElementById("a_ok");
+                        await myButton.click();
+                        await new Promise(resolve => setTimeout(resolve, 2300));
+                    }
+                }
+                await new Promise(resolve => setTimeout(resolve, 200));
+                for (let j = 0; j < 5; j++) {
+                    //console.log("Klikam torbę:",i,j,"raz...")
+                    console.log(`Iteracja wewnętrznego fora nr ${j}`);
+                    divButton.click();
+                    console.log("Jestem torbą 1!");
+                    console.log("Klikam na: ", divButton);
+                    await new Promise(resolve => setTimeout(resolve, 350));
+                    const enhanceSubmit = document.querySelector(".enhance__submit");
+                    const siButton = enhanceSubmit.querySelector(".SI-button");
+
+                    if (siButton.classList.contains("disable")) {
+                        console.log("SI-button is disabled, so skipping for...", siButton);
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        break;
+                    } else {
+                        console.log("SI-button is enabled loop 1");
 
                         await siButton.click();
                         const myButton = document.getElementById("a_ok");
@@ -577,8 +605,10 @@
                         await new Promise(resolve => setTimeout(resolve, 2300));
                     }
                 }
-
                 await new Promise(resolve => setTimeout(resolve, 200)); // dodana obietnica
+                //divButton = document.querySelector('div[tip="Dodaj automatycznie przedmioty pospolite z torby numer 1."]');
+
+                //await new Promise(resolve => setTimeout(resolve, 200)); // dodana obietnica
 
 
                 if (burnUni == 1) {
@@ -652,7 +682,6 @@
 
         await handleClick(); // wywołanie funkcji z użyciem await
     };
-
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
