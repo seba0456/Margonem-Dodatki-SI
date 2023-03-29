@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.0.4
+// @version      0.0.5
 // @description  Prosty dodatek do automatycznego ulepszania itemów.
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
