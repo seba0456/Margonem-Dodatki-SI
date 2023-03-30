@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.1.1
+// @version      0.1.2
 // @description  Prosty dodatek do automatycznego ulepszania itemów.
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
@@ -689,6 +689,12 @@
             } else {
                 alert("Item nie znajduje się w torbie!");
             }
+            // uzyskanie referencji do elementu <div class="close-but">
+            const parentDiv = document.getElementById('crafting');
+            const closeButton = parentDiv.querySelector('.close-but');
+            closeButton.click();
+            // dodanie obsługi zdarzenia kliknięcia dla elementu <div class="close-but">
+
 
             // Odblokowanie przycisku
             button.disabled = false;
