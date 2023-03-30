@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.0.5
+// @version      0.1.0
 // @description  Prosty dodatek do automatycznego ulepszania itemów.
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
@@ -83,12 +83,15 @@
     var box = document.createElement("div");
     // Ustaw mu styl CSS z pozycją absolutną, tłem i obramowaniem
     box.style.position = "absolute";
-    box.style.background = "blue";
-    box.style.border = "1px solid #ccc";
+    box.style.background = "black";
+    box.style.border = "2px solid #ffd700";
     box.style.padding = "10px";
     box.style.textAlign = "center";
+    box.style.width = "115x"; // ustawia szerokość elementu div na 300 pikseli
+box.style.wordWrap = "break-word"; 
+    //box.style.zoom = "60%";
     // Dodaj treść do okna
-    box.innerHTML = "<p tyle='text-align:center;'>Ulepszacz</p> </br>";
+    box.innerHTML = "<p style='text-align:center; font-size:12pt;'>Ulepszacz</p> </br>";
 
     // Utwórz funkcję, która będzie przesuwać okno
     function dragElement(element) {
@@ -127,7 +130,10 @@
             // Zakończ przesuwanie elementu
             document.onmouseup = null;
             document.onmousemove = null;
+            // Zapamiętaj pozycję elementu w localStorage
+            localStorage.setItem("boxPosition", JSON.stringify({top: element.style.top, left: element.style.left}));
         }
+        
     }
     //utwórz przycisk
     var button = document.createElement("button");
@@ -135,15 +141,20 @@
     button.innerText = "Ulepsz item";
     // Dodaj przycisk do okna
     box.appendChild(button);
+    button.style.fontSize = "10px";
     //Dodaj br
     var br = document.createElement("br");
     var br2 = document.createElement("br");
     box.appendChild(br);
     //Odswież ID divów
     const para = document.createElement("p");
-    const para2 = document.createElement("p")
+    para.style.fontSize = "12px";
+    para.style.wordWrap = "break-word";
+    const para2 = document.createElement("p");
     para2.innerHTML = "DEBUG";
+    para2.style.fontSize = "12px";
     const itemIcon = document.createElement("img");
+    itemIcon.style.zoom = "75%";
     function defaultPara() {
         console.log("domyłśne")
         para.innerHTML = "Brak itemu, proszę wybrać";
@@ -162,13 +173,12 @@
     box.appendChild(br2);
     var buttonPick = document.createElement("button");
     buttonPick.innerText = "Pick";
+    buttonPick.style.fontSize = "11px";
     // Dodaj przycisk do okna
     box.appendChild(buttonPick);
     box.appendChild(br);
 
-    // Utwórz nowy element ul, który będzie przechowywał nazwy przedmiotów
-    var buttonTakeOff = document.createElement("button");
-    buttonTakeOff.innerText = "Zdejmij item";
+
 
     function findItemByName(itemName, addImage) {
 
@@ -455,7 +465,7 @@
     checkbox.type = "checkbox";
     label.appendChild(checkbox);
     label.appendChild(document.createTextNode("Palić unikaty?"));
-
+    label.style.zoom = "60%"; 
     // Dodanie elementu <label> do strony
     box.appendChild(label);
 
@@ -686,6 +696,13 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     buttonPick.onclick = pickItem;
+
+    var savedPosition = localStorage.getItem("boxPosition");
+    if (savedPosition) {
+        savedPosition = JSON.parse(savedPosition);
+        box.style.top = savedPosition.top;
+        box.style.left = savedPosition.left;
+    }
 
     dragElement(box);
     box.style.zIndex = "9999";
