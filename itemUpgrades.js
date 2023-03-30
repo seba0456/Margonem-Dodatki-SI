@@ -88,7 +88,7 @@
     box.style.border = "2px solid #ffd700";
     box.style.padding = "10px";
     box.style.textAlign = "center";
-    box.style.width = "115x"; // ustawia szerokość elementu div na 300 pikseli
+    box.style.width = "135px"; // ustawia szerokość elementu div na 300 pikseli
     box.style.wordWrap = "break-word";
     //box.style.zoom = "60%";
     // Dodaj treść do okna
@@ -131,7 +131,6 @@
             }
         }
 
-
         function closeDragElement() {
             // Zakończ przesuwanie elementu
             document.onmouseup = null;
@@ -139,7 +138,6 @@
             // Zapamiętaj pozycję elementu w localStorage
             localStorage.setItem("boxPosition", JSON.stringify({ top: element.style.top, left: element.style.left }));
         }
-
     }
     //utwórz przycisk
     var button = document.createElement("button");
@@ -174,7 +172,6 @@
     //para.style.fontSize = "40%";
     box.appendChild(para);
 
-
     box.appendChild(itemIcon);
     box.appendChild(br2);
     var buttonPick = document.createElement("button");
@@ -183,8 +180,6 @@
     // Dodaj przycisk do okna
     box.appendChild(buttonPick);
     box.appendChild(br);
-
-
 
     function findItemByName(itemName, addImage) {
 
@@ -625,12 +620,6 @@
                         await new Promise(resolve => setTimeout(resolve, 2000));
                     }
                 }
-                // dodana obietnica
-                //divButton = document.querySelector('div[tip="Dodaj automatycznie przedmioty pospolite z torby numer 1."]');
-
-                //await new Promise(resolve => setTimeout(resolve, 200)); // dodana obietnica
-
-
                 if (burnUni == 1) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                     console.log("Zaczynam palić uni!");
@@ -707,9 +696,6 @@
 
         await handleClick(); // wywołanie funkcji z użyciem await
     };
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
     buttonPick.onclick = pickItem;
 
     var savedPosition = localStorage.getItem("boxPosition");
