@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Automatyczne ulepszanie przedmiotów
-// @version      0.1.0
+// @version      0.1.1
 // @description  Prosty dodatek do automatycznego ulepszania itemów.
 // @author       Seba0456
 // @match        http*://*.margonem.pl/
@@ -25,6 +25,7 @@
 
 (function () {
     'use strict';
+    console.log("Limonka z miętą załadowana!");
     //Zmienne
     var WorldName = null;
     var PlayerName = null;
