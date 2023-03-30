@@ -114,18 +114,23 @@ box.style.wordWrap = "break-word";
             document.onmousemove = elementDrag;
         }
 
-        function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            // Oblicz nową pozycję elementu
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            // Ustaw nową pozycję elementu
-            element.style.top = element.offsetTop - pos2 + "px";
-            element.style.left = element.offsetLeft - pos1 + "px";
-        }
+       function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // Oblicz nową pozycję elementu
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // Sprawdź, czy nowa pozycja elementu nie wykracza poza granice okna
+    if (element.offsetTop - pos2 >= 0 && element.offsetTop - pos2 + element.offsetHeight <= window.innerHeight) {
+        element.style.top = element.offsetTop - pos2 + "px";
+    }
+    if (element.offsetLeft - pos1 >= 0 && element.offsetLeft - pos1 + element.offsetWidth <= window.innerWidth) {
+        element.style.left = element.offsetLeft - pos1 + "px";
+    }
+}
+
 
         function closeDragElement() {
             // Zakończ przesuwanie elementu
