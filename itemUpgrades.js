@@ -89,7 +89,7 @@
     box.style.padding = "10px";
     box.style.textAlign = "center";
     box.style.width = "115x"; // ustawia szerokość elementu div na 300 pikseli
-box.style.wordWrap = "break-word"; 
+    box.style.wordWrap = "break-word";
     //box.style.zoom = "60%";
     // Dodaj treść do okna
     box.innerHTML = "<p style='text-align:center; font-size:12pt;'>Ulepszacz</p> </br>";
@@ -114,22 +114,22 @@ box.style.wordWrap = "break-word";
             document.onmousemove = elementDrag;
         }
 
-       function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // Oblicz nową pozycję elementu
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // Sprawdź, czy nowa pozycja elementu nie wykracza poza granice okna
-    if (element.offsetTop - pos2 >= 0 && element.offsetTop - pos2 + element.offsetHeight <= window.innerHeight) {
-        element.style.top = element.offsetTop - pos2 + "px";
-    }
-    if (element.offsetLeft - pos1 >= 0 && element.offsetLeft - pos1 + element.offsetWidth <= window.innerWidth) {
-        element.style.left = element.offsetLeft - pos1 + "px";
-    }
-}
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // Oblicz nową pozycję elementu
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // Sprawdź, czy nowa pozycja elementu nie wykracza poza granice okna
+            if (element.offsetTop - pos2 >= 0 && element.offsetTop - pos2 + element.offsetHeight <= window.innerHeight) {
+                element.style.top = element.offsetTop - pos2 + "px";
+            }
+            if (element.offsetLeft - pos1 >= 0 && element.offsetLeft - pos1 + element.offsetWidth <= window.innerWidth) {
+                element.style.left = element.offsetLeft - pos1 + "px";
+            }
+        }
 
 
         function closeDragElement() {
@@ -137,9 +137,9 @@ box.style.wordWrap = "break-word";
             document.onmouseup = null;
             document.onmousemove = null;
             // Zapamiętaj pozycję elementu w localStorage
-            localStorage.setItem("boxPosition", JSON.stringify({top: element.style.top, left: element.style.left}));
+            localStorage.setItem("boxPosition", JSON.stringify({ top: element.style.top, left: element.style.left }));
         }
-        
+
     }
     //utwórz przycisk
     var button = document.createElement("button");
@@ -471,7 +471,7 @@ box.style.wordWrap = "break-word";
     checkbox.type = "checkbox";
     label.appendChild(checkbox);
     label.appendChild(document.createTextNode("Palić unikaty?"));
-    label.style.zoom = "60%"; 
+    label.style.zoom = "60%";
     // Dodanie elementu <label> do strony
     box.appendChild(label);
 
@@ -672,9 +672,7 @@ box.style.wordWrap = "break-word";
                                         loadItemToSlot(burnableItems[x]);
                                         console.log(`Iteracja ${j + 1} z ${iterations}`);
                                         console.log("chcę wczytać...", x);
-
                                     }
-
 
                                 }
                             }
