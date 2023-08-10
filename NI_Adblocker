@@ -1,0 +1,41 @@
+// ==UserScript==
+// @name         Adblock z reklamą NI
+// @version      0.0.1
+// @description  Prosty dodatek, który kasuje baner zachęcający użytkownika to przejścia na NI
+// @author       Seba0456
+// @match        http*://*.margonem.pl/
+// @match        http*://*.margonem.com/
+// @exclude      http*://margonem.*/*
+// @exclude      http*://www.margonem.*/*
+// @exclude      http*://new.margonem.*/*
+// @exclude      http*://forum.margonem.*/*
+// @exclude      http*://commons.margonem.*/*
+// @exclude      http*://dev-commons.margonem.*/*
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_xmlhttpRequest
+// @connect      margonem.pl
+// @connect      margonem.com
+// @run-at       document-body
+// @updateURL    https://sebaprojects.online/margonem/ni_block.user.js
+// @downloadURL  https://sebaprojects.online/margonem/ni_block.user.js
+// @grant        GM_addStyle
+// @grant GM_log
+// ==/UserScript==
+
+(function () {
+    'use strict';
+    function removeAd() {
+        const element = document.getElementById("ni-promo");
+        element.remove();
+    }
+    function waitForLoading() {
+        var loadingDiv = document.getElementById("loading");
+        if (loadingDiv.style.display !== "none") {
+            setTimeout(waitForLoading, 100); // wywoĹaj funkcjÄ ponownie po 100 milisekundach
+        } else {
+            removeAd();
+        }
+    }
+    waitForLoading();
+})();
